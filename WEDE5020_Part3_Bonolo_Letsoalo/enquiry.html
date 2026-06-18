@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO: Title tag -->
+  <title>Book an Appointment | Flawlessly Blended Makeup Artist</title>
+  <!-- SEO: Meta description -->
+  <meta name="description" content="Book your makeup appointment with Flawlessly Blended. Choose your service, preferred date and time, and send your booking instantly via WhatsApp.">
+  <!-- SEO: Meta keywords -->
+  <meta name="keywords" content="book makeup appointment, Pretoria makeup booking, Flawlessly Blended booking, makeup WhatsApp booking">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Site header displaying the brand name -->
+  <header>Flawlessly Blended</header>
+
+  <!-- Main navigation menu with hamburger for mobile -->
+  <nav id="mainNav">
+    <!-- Hamburger 3-line button -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <!-- Nav links -->
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="services.html">Pricing</a>
+      <a href="enquiry.html">Booking</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Booking section with appointment request form -->
+  <section>
+    <h1>Book Your Appointment</h1>
+    <p>Fill out the form below and send us a WhatsApp message to secure your booking.</p>
+
+    <!-- Booking form - validates then submits via WhatsApp -->
+    <form id="bookingForm" novalidate>
+
+      <!-- Client full name input -->
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name">
+      <!-- Error message shown if name is empty -->
+      <span class="error-msg" id="nameError">Please enter your full name.</span>
+
+      <!-- Service selection dropdown -->
+      <label for="service">Select Service:</label>
+      <select id="service" name="service">
+        <option value="">--Select a Service--</option>
+        <option value="Natural Glam">Natural Glam (R230)</option>
+        <option value="Soft Glam">Soft Glam (R300)</option>
+        <option value="Soft Glam + Lashes">Soft Glam + Lashes (R330)</option>
+        <option value="Full Glam">Full Glam (R400)</option>
+        <option value="Full Glam + Lashes">Full Glam + Lashes (R430)</option>
+      </select>
+      <!-- Error message shown if no service selected -->
+      <span class="error-msg" id="serviceError">Please select a service.</span>
+
+      <!-- Preferred appointment date -->
+      <label for="date">Preferred Date:</label>
+      <input type="date" id="date" name="date">
+      <!-- Error message shown if no date selected -->
+      <span class="error-msg" id="dateError">Please select a preferred date.</span>
+
+      <!-- Preferred appointment time -->
+      <label for="time">Preferred Time:</label>
+      <input type="time" id="time" name="time">
+      <!-- Error message shown if no time selected -->
+      <span class="error-msg" id="timeError">Please select a preferred time.</span>
+
+      <!-- Optional special requests from client -->
+      <label for="notes">Additional Notes:</label>
+      <textarea id="notes" name="notes" placeholder="Any special requests..."></textarea>
+
+      <!-- Submit button triggers validation then WhatsApp -->
+      <button type="submit">Send Booking via WhatsApp</button>
+
+      <!-- Success message shown after valid submission -->
+      <p class="success-msg" id="successMsg">Your booking is being sent via WhatsApp!</p>
+
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Flawlessly Blended | IG: @flawlessly.blended | +27 68 082 4771
+    <p class="dev-credit">Bonolo Letsoalo</p>
+  </footer>
+
+  <script>
+    // Hamburger toggle
+    document.getElementById('hamburgerBtn').addEventListener('click', function() {
+      var navLinks = document.getElementById('navLinks');
+      if (navLinks.style.display === 'flex') {
+        navLinks.style.display = 'none';
+      } else {
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.width = '100%';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '100%';
+        navLinks.style.left = '0';
+        navLinks.style.backgroundColor = '#b94d81';
+        navLinks.style.padding = '10px 0';
+        navLinks.style.zIndex = '100';
+        navLinks.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+      }
+    });
+
+    // Show/hide hamburger based on screen width
+    function checkScreenSize() {
+      var hamburger = document.getElementById('hamburgerBtn');
+      var navLinks = document.getElementById('navLinks');
+      if (window.innerWidth <= 768) {
+        hamburger.style.display = 'flex';
+        navLinks.style.display = 'none';
+        navLinks.style.position = 'absolute';
+      } else {
+        hamburger.style.display = 'none';
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'row';
+        navLinks.style.width = 'auto';
+        navLinks.style.position = 'static';
+        navLinks.style.boxShadow = 'none';
+        navLinks.style.padding = '0';
+        navLinks.style.backgroundColor = 'transparent';
+      }
+    }
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    // Validates all form fields and shows error messages if invalid
+    function validateForm() {
+      var isValid = true;
+      var fields = [
+        { id: 'name', errorId: 'nameError', check: function(v) { return v.trim() !== ''; } },
+        { id: 'service', errorId: 'serviceError', check: function(v) { return v !== ''; } },
+        { id: 'date', errorId: 'dateError', check: function(v) { return v !== ''; } },
+        { id: 'time', errorId: 'timeError', check: function(v) { return v !== ''; } }
+      ];
+
+      fields.forEach(function(field) {
+        var val = document.getElementById(field.id).value;
+        var err = document.getElementById(field.errorId);
+        if (!field.check(val)) {
+          err.style.display = 'block';
+          isValid = false;
+        } else {
+          err.style.display = 'none';
+        }
+      });
+
+      return isValid;
+    }
+
+    // Form submit - validate then send via WhatsApp
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!validateForm()) return;
+
+      var name = encodeURIComponent(document.getElementById('name').value);
+      var service = encodeURIComponent(document.getElementById('service').value);
+      var date = encodeURIComponent(document.getElementById('date').value);
+      var time = encodeURIComponent(document.getElementById('time').value);
+      var notes = encodeURIComponent(document.getElementById('notes').value);
+
+      // Show success message
+      document.getElementById('successMsg').style.display = 'block';
+
+      // Build and open WhatsApp link
+      var message = 'Hello! I would like to book a Flawlessly Blended appointment.%0AName: ' + name + '%0AService: ' + service + '%0ADate: ' + date + '%0ATime: ' + time + '%0ANotes: ' + notes;
+      setTimeout(function() {
+        window.open('https://wa.me/27680824771?text=' + message, '_blank');
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>

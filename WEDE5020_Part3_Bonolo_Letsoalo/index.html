@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="oXhlHkVzCjX4J4ZGJVd5jpfNQPqVQONa-KQs07UaQ5Q" />
+    <!-- SEO: Title tag -->
+    <title>Flawlessly Blended | Professional Makeup Artist in Pretoria</title>
+    <!-- SEO: Meta description -->
+    <meta name="description" content="Flawlessly Blended is a professional makeup artist based in Pretoria offering Natural Glam, Soft Glam, and Full Glam makeup services for all occasions.">
+    <!-- SEO: Meta keywords -->
+    <meta name="keywords" content="makeup artist, Pretoria, glam makeup, Natural Glam, Soft Glam, Full Glam, beauty, Flawlessly Blended">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Site header displaying the brand name -->
+    <header>Flawlessly Blended</header>
+
+    <!-- Main navigation menu with hamburger for mobile -->
+    <nav id="mainNav">
+        <!-- Hamburger 3-line button - shown on small screens -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <!-- Nav links - hidden on mobile until hamburger is clicked -->
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="services.html">Pricing</a>
+            <a href="enquiry.html">Booking</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero/welcome section introducing the business -->
+    <section>
+        <h1>Welcome to Flawlessly Blended</h1>
+        <p>Your one-stop beauty solution. Professional makeup services for every occasion.</p>
+    </section>
+
+    <!-- Brand logo image -->
+    <img src="images/logo.png.jpg" alt="Flawlessly Blended Logo" class="logo">
+
+    <!-- About Us section describing the business -->
+    <section>
+        <h2>About Us</h2>
+        <p>We pride ourselves in providing quality service, making every client feel special and beautiful.</p>
+    </section>
+
+    <!-- Footer with copyright, social media, and contact info -->
+    <footer>
+        &copy; 2026 Flawlessly Blended | IG: @flawlessly.blended | +27 68 082 4771
+        <p class="dev-credit">Bonolo Letsoalo</p>
+    </footer>
+
+    <script>
+        // Hamburger toggle using event listener (more reliable than onclick)
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            var navLinks = document.getElementById('navLinks');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.width = '100%';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.backgroundColor = '#b94d81';
+                navLinks.style.padding = '10px 0';
+                navLinks.style.zIndex = '100';
+                navLinks.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+            }
+        });
+
+        // Show/hide hamburger based on screen width
+        function checkScreenSize() {
+            var hamburger = document.getElementById('hamburgerBtn');
+            var navLinks = document.getElementById('navLinks');
+            if (window.innerWidth <= 768) {
+                hamburger.style.display = 'flex';
+                navLinks.style.display = 'none';
+                navLinks.style.position = 'absolute';
+            } else {
+                hamburger.style.display = 'none';
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.width = 'auto';
+                navLinks.style.position = 'static';
+                navLinks.style.boxShadow = 'none';
+                navLinks.style.padding = '0';
+                navLinks.style.backgroundColor = 'transparent';
+            }
+        }
+
+        // Run on page load and on every resize
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+    </script>
+
+</body>
+</html>

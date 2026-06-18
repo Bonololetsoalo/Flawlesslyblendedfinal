@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO: Title tag -->
+    <title>Gallery | Flawlessly Blended Makeup Artist</title>
+    <!-- SEO: Meta description -->
+    <meta name="description" content="Browse our gallery of stunning makeup looks including Natural Glam, Soft Glam, and Full Glam by Flawlessly Blended in Pretoria.">
+    <!-- SEO: Meta keywords -->
+    <meta name="keywords" content="makeup gallery, glam looks, Pretoria makeup, before and after makeup, Flawlessly Blended gallery">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Site header displaying the brand name -->
+    <header>Flawlessly Blended</header>
+
+    <!-- Main navigation menu with hamburger for mobile -->
+    <nav id="mainNav">
+        <!-- Hamburger 3-line button -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <!-- Nav links -->
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="services.html">Pricing</a>
+            <a href="enquiry.html">Booking</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Gallery section displaying client makeup work -->
+    <section>
+        <h1>Our Work</h1>
+        <p>See the magic we create for our clients. Click any image to view full size.</p>
+
+        <!-- Gallery grid - each image opens lightbox when clicked -->
+        <div class="gallery-grid">
+            <img src="images/client1.jpg" alt="Client 1 natural glam makeup look" onclick="openLightbox(this)">
+            <img src="images/client2.jpg" alt="Client 2 soft glam makeup look" onclick="openLightbox(this)">
+            <img src="images/client4.jpg" alt="Client 4 full glam makeup look" onclick="openLightbox(this)">
+            <img src="images/client5.jpg" alt="Client 5 glam makeup look" onclick="openLightbox(this)">
+            <img src="images/client6.jpg" alt="Client 6 soft glam makeup look" onclick="openLightbox(this)">
+            <img src="images/client7.jpg" alt="Client 7 natural glam makeup look" onclick="openLightbox(this)">
+        </div>
+    </section>
+
+    <!-- Lightbox overlay - hidden by default, shows full image when clicked -->
+    <div class="lightbox" id="lightbox">
+        <!-- Close button -->
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <!-- Full size image -->
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Full size makeup look">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Flawlessly Blended | IG: @flawlessly.blended | +27 68 082 4771
+        <p class="dev-credit">Bonolo Letsoalo</p>
+    </footer>
+
+    <script>
+        // Hamburger toggle
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            var navLinks = document.getElementById('navLinks');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.width = '100%';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.backgroundColor = '#b94d81';
+                navLinks.style.padding = '10px 0';
+                navLinks.style.zIndex = '100';
+                navLinks.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+            }
+        });
+
+        // Show/hide hamburger based on screen width
+        function checkScreenSize() {
+            var hamburger = document.getElementById('hamburgerBtn');
+            var navLinks = document.getElementById('navLinks');
+            if (window.innerWidth <= 768) {
+                hamburger.style.display = 'flex';
+                navLinks.style.display = 'none';
+                navLinks.style.position = 'absolute';
+            } else {
+                hamburger.style.display = 'none';
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.width = 'auto';
+                navLinks.style.position = 'static';
+                navLinks.style.boxShadow = 'none';
+                navLinks.style.padding = '0';
+                navLinks.style.backgroundColor = 'transparent';
+            }
+        }
+
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        // Open lightbox and show full size image
+        function openLightbox(img) {
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Close when clicking the X button
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+
+        // Close when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+
+</body>
+</html>

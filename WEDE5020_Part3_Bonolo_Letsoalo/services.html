@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO: Title tag -->
+    <title>Pricing | Flawlessly Blended Makeup Artist</title>
+    <!-- SEO: Meta description -->
+    <meta name="description" content="View Flawlessly Blended makeup service packages and pricing. Natural Glam from R230, Soft Glam from R300, Full Glam from R400. Book your appointment today.">
+    <!-- SEO: Meta keywords -->
+    <meta name="keywords" content="makeup pricing, Natural Glam R230, Soft Glam R300, Full Glam R400, makeup packages, Pretoria makeup artist prices">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Site header displaying the brand name -->
+    <header>Flawlessly Blended</header>
+
+    <!-- Main navigation menu with hamburger for mobile -->
+    <nav id="mainNav">
+        <!-- Hamburger 3-line button -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <!-- Nav links -->
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="services.html">Pricing</a>
+            <a href="enquiry.html">Booking</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Pricing section listing all available makeup services -->
+    <section>
+        <h1>Our Services &amp; Pricing</h1>
+        <p>Find the perfect look for your occasion.</p>
+
+        <!-- Dynamic search feature - filters pricing cards in real time -->
+        <div class="search-container">
+            <input type="text" id="serviceSearch" placeholder="Search services e.g. Glam, Lashes..." oninput="searchServices()" aria-label="Search makeup services">
+            <!-- Shows how many results match the search -->
+            <p id="searchResult" class="search-result"></p>
+        </div>
+
+        <!-- Pricing cards container -->
+        <div class="pricing-table" id="pricingTable">
+
+            <!-- Individual service pricing cards -->
+            <div class="pricing-card">
+                <h2>Natural Glam</h2>
+                <p class="price">R230</p>
+                <p>Lashes Excluded</p>
+            </div>
+
+            <div class="pricing-card">
+                <h2>Soft Glam</h2>
+                <p class="price">R300</p>
+                <p>Lashes Excluded</p>
+            </div>
+
+            <div class="pricing-card">
+                <h2>Soft Glam + Lashes</h2>
+                <p class="price">R330</p>
+                <p>Lashes Included</p>
+            </div>
+
+            <div class="pricing-card">
+                <h2>Full Glam</h2>
+                <p class="price">R400</p>
+                <p>Lashes Excluded</p>
+            </div>
+
+            <div class="pricing-card">
+                <h2>Full Glam + Lashes</h2>
+                <p class="price">R430</p>
+                <p>Lashes Included</p>
+            </div>
+
+        </div>
+
+        <!-- Shown when no search results match -->
+        <p id="noResults" class="no-results" style="display:none;">No services found. Try a different search.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Flawlessly Blended | IG: @flawlessly.blended | +27 68 082 4771
+        <p class="dev-credit">Bonolo Letsoalo</p>
+    </footer>
+
+    <script>
+        // Hamburger toggle
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            var navLinks = document.getElementById('navLinks');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.width = '100%';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.backgroundColor = '#b94d81';
+                navLinks.style.padding = '10px 0';
+                navLinks.style.zIndex = '100';
+                navLinks.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+            }
+        });
+
+        // Show/hide hamburger based on screen width
+        function checkScreenSize() {
+            var hamburger = document.getElementById('hamburgerBtn');
+            var navLinks = document.getElementById('navLinks');
+            if (window.innerWidth <= 768) {
+                hamburger.style.display = 'flex';
+                navLinks.style.display = 'none';
+                navLinks.style.position = 'absolute';
+            } else {
+                hamburger.style.display = 'none';
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.width = 'auto';
+                navLinks.style.position = 'static';
+                navLinks.style.boxShadow = 'none';
+                navLinks.style.padding = '0';
+                navLinks.style.backgroundColor = 'transparent';
+            }
+        }
+
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        // Dynamically filters pricing cards based on search input
+        function searchServices() {
+            var query = document.getElementById('serviceSearch').value.toLowerCase();
+            var cards = document.querySelectorAll('.pricing-card');
+            var noResults = document.getElementById('noResults');
+            var searchResult = document.getElementById('searchResult');
+            var visibleCount = 0;
+
+            cards.forEach(function(card) {
+                if (card.innerText.toLowerCase().includes(query)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            searchResult.textContent = query && visibleCount > 0 ? 'Showing ' + visibleCount + ' result(s) for "' + query + '"' : '';
+        }
+    </script>
+
+</body>
+</html>
